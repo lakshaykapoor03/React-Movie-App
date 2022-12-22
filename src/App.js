@@ -4,6 +4,8 @@ import ReactDOM from'react-dom';
 import './App.css';
 import MovieComponent from './Components/MovieComponent';
 import MovieInfoComponent from './Components/MovieInfoComponent';
+import Select from "react-select";
+import AsyncSelect from 'react-select/async';
 
 const APIKEY="6be39682";
 function App() {
@@ -30,6 +32,21 @@ setTimeoutId(timeout)
     setFavourite(!favourite)
   }
 
+  const options=[
+{value:"Action", label:"Action"},
+{value:"Adventure", label:"Adventure"},
+{value:"Animation", label:"Animation"},
+{value:"Comedy", label:"Comedy"},
+{value:"Crime", label:"Crime"},
+{value:"Documentary", label:"Documentary"},
+{value:"Drama", label:"Drama"},
+{value:"Family", label:"Family"},
+{value:"Fantasy", label:"Fantasy"},
+{value:"Horror", label:"Horror"},
+{value:"Tony", label:"Tony"},
+{value:"Tony", label:"Tony"},
+  ]
+
   return (
     <>
   <div className="text-[40px] bg-[black] flex flex-wrap justify-between py-[20px] items-center px-[2%]">
@@ -38,8 +55,10 @@ setTimeoutId(timeout)
       <h2 className="text-white">React Movie App</h2>
       {!favourite ? <button onClick={onFavouriteChange} className="text-[white] text-[20px] bg-[green] rounded-[15px] ml-[10%] h-[40px] w-[120px] mt-[2%]">Favourites</button>
       :<button onClick={onFavouriteChange} className="text-[white] text-[20px] bg-[green] rounded-[15px] ml-[10%] h-[40px] w-[120px] mt-[2%]">Home</button>}
+       
     </div>
     <div className="w-[800px] h-[40px] bg-white rounded-[20px] flex items-center">
+     
     <i className="fa-solid fa-magnifying-glass text-[20px] mx-5"></i>
       <input className="w-[700px] h-[30px] outline-0 border-0 text-[20px]"
        type="text" 
@@ -49,12 +68,16 @@ setTimeoutId(timeout)
     </div>
   </div>
 
+  <div className=" bg-[black]">
+  <Select className=" w-[80vw] text-[15px] self-center ml-[40px] pb-[5px]" options={options} isMulti />
+  </div>
+
 {/* Hero section */}
 
 {selectedMovie && !favourite && <MovieInfoComponent setSelectedMovie={setSelectedMovie} addToList={addToList} selectedMovie={selectedMovie} setAddToList={setAddToList}/>}
   <div className="flex flex-wrap justify-evenly mt-[30px] gap-[20px] cursor-pointer">
 {!favourite && movieList?.length?movieList.map((movie,index)=><MovieComponent movie={movie} key={index} setSelectedMovie={setSelectedMovie}/>):"" }
-{favourite && addToList?.length?addToList.map((movie,index)=><MovieComponent movie={movie} key={index} />):"No Movie Search" }
+{favourite && addToList?.length?addToList.map((movie,index)=><MovieComponent movie={movie} key={index} />):"" }
 
   </div>
   </>

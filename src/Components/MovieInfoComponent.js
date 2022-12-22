@@ -9,6 +9,7 @@ const MovieInfoComponent = (props) => {
 
   const addToListHandler = async() => {
     await props.setAddToList([...props.addToList, movieInfo])
+    alert("Added to favourites")
     
   }
   // console.log(addToList)
